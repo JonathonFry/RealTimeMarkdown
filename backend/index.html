@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Live markdown collaboration</title>
+</head>
+
+<style>
+
+
+    #markdown_preview {
+      text-align: left;
+      background: #f1f1f1;
+      width: 500px;
+      min-height: 300px;
+      padding: 20px;
+
+    }
+
+    #markdown {
+      text-align: left;
+      background: #f1f1f1;
+      width: 500px;
+      min-height: 300px;
+      padding: 20px;
+
+    }
+
+
+</style>
+
+<body>
+<center>
+    <h3>Markdown Editor</h3>
+    <pre id="markdown_preview"></pre>
+    <textarea id="markdown" cols="40" rows="5"></textarea>
+</center>
+
+<script>
+      var url = "ws://" + window.location.host + "/ws";
+      var ws = new WebSocket(url);
+
+      var markdownPreview = document.getElementById("markdown_preview");
+      var markdownEditor = document.getElementById("markdown");
+
+      ws.onmessage = function (msg) {
+        var parts = msg.data.split(">>");
+        var raw = parts[0];
+        var html = parts[1];
+        markdownPreview.innerHTML = html;
+        if(raw != ""){
+        markdownEditor.value = raw;
+        }
+      };
+
+      markdownEditor.onkeydown = function (e) {
+            setTimeout(function(){
+            ws.send(markdownEditor.value);
+            }, 100);
+    };
+
+</script>
+</body>
+</html>
