@@ -1,6 +1,6 @@
-Real time markdown editor.
+# Real time markdown editor.
 
-Backend written in Go using websockets. Uses the `blackfriday` library to parse markdown and generate HTML.
+Backend written in Go using websockets. Uses the `blackfriday` go library to parse markdown and generate HTML.
 
 
 Install dependencies with `/install.sh`
