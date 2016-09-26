@@ -24,19 +24,23 @@
 
 <body>
     <center>
-        <h3>Markdown Editor</h3>
+        <h1>Editing {{.Title}}</h1>
         <pre id="markdown_preview"></pre>
-        <textarea id="markdown" cols="40" rows="5"></textarea>
+        <form action="/save/{{.Title}}" method="POST">
+            <div><textarea id="markdown" name="body" rows="5" cols="40">{{printf "%s" .Body}}</textarea></div>
+            <div><input type="submit" value="Save"></div>
+        </form>
     </center>
 
-    <script>
-        var url = "ws://" + window.location.host + "/ws";
+    <script type="text/javascript">
+        var url = "ws://" + window.location.host + "/ws/" + {{.Title}};
         var ws = new WebSocket(url);
 
         var markdownPreview = document.getElementById("markdown_preview");
         var markdownEditor = document.getElementById("markdown");
 
         ws.onmessage = function(msg) {
+            console.log(msg);
             var parts = msg.data.split(">>");
             var raw = parts[0];
             var html = parts[1];
@@ -52,6 +56,7 @@
             }, 100);
         };
     </script>
+
 </body>
 
 </html>
