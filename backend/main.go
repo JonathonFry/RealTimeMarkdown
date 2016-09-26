@@ -11,12 +11,12 @@ import (
 const split = ">>"
 
 var templates = template.Must(template.ParseFiles("tmpl/edit.html", "tmpl/view.html"))
-var validPath = regexp.MustCompile("^/(edit|save|view|ws)/([a-zA-Z0-9-]+)$")
+var validPath = regexp.MustCompile("^/realtimemarkdown/(edit|save|view|ws)/([a-zA-Z0-9-]+)$")
 
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := loadPage(title)
 	if err != nil {
-		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
+		http.Redirect(w, r, "/realtimemarkdown/edit/"+title, http.StatusFound)
 		return
 	}
 
@@ -45,7 +45,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 		return
 	}
 
-	http.Redirect(w, r, "/view/"+title, http.StatusFound)
+	http.Redirect(w, r, "/realtimemarkdown/view/"+title, http.StatusFound)
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
@@ -71,10 +71,10 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.Handl
 
 func main() {
 	m := melody.New()
-	http.HandleFunc("/view/", makeHandler(viewHandler))
-	http.HandleFunc("/edit/", makeHandler(editHandler))
-	http.HandleFunc("/save/", makeHandler(saveHandler))
-	http.HandleFunc("/ws/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/realtimemarkdown/view/", makeHandler(viewHandler))
+	http.HandleFunc("/realtimemarkdown/edit/", makeHandler(editHandler))
+	http.HandleFunc("/realtimemarkdown/save/", makeHandler(saveHandler))
+	http.HandleFunc("/realtimemarkdown/ws/", func(w http.ResponseWriter, r *http.Request) {
 		m.HandleRequest(w, r)
 
 		pathSplit := validPath.FindStringSubmatch(r.URL.Path)
@@ -113,5 +113,5 @@ func main() {
 		m.Broadcast([]byte(string(p.Body) + split + string(output)))
 	})
 
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":3004", nil)
 }

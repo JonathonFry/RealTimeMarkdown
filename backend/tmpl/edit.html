@@ -26,14 +26,14 @@
     <center>
         <h1>Editing {{.Title}}</h1>
         <pre id="markdown_preview"></pre>
-        <form action="/save/{{.Title}}" method="POST">
+        <form action="/realtimemarkdown/save/{{.Title}}" method="POST">
             <div><textarea id="markdown" name="body" rows="5" cols="40">{{printf "%s" .Body}}</textarea></div>
             <div><input type="submit" value="Save"></div>
         </form>
     </center>
 
     <script type="text/javascript">
-        var url = "ws://" + window.location.host + "/ws/" + {{.Title}};
+        var url = "ws://" + window.location.host + "/realtimemarkdown/ws/" + {{.Title}};
         var ws = new WebSocket(url);
 
         var markdownPreview = document.getElementById("markdown_preview");
