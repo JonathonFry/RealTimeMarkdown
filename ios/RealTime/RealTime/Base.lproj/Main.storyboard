@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,80 +25,32 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="McU-Pq-QPb">
-                                <frame key="frameInset" minX="20" minY="54" width="560" height="526"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="S2Z-yO-uBe">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dws-Ui-dgw"/>
-                                </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="o6x-E1-DER" secondAttribute="leading" id="030-YE-GQG"/>
-                            <constraint firstItem="o6x-E1-DER" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="29h-Bp-7KE"/>
-                            <constraint firstItem="McU-Pq-QPb" firstAttribute="top" secondItem="o6x-E1-DER" secondAttribute="bottom" constant="13" id="3XW-Hf-eKG"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="McU-Pq-QPb" secondAttribute="bottom" constant="20" id="5US-XY-3vp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="o6x-E1-DER" secondAttribute="trailing" id="CNf-Bb-zKz"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="McU-Pq-QPb" secondAttribute="leading" id="Lxf-7z-pcm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="McU-Pq-QPb" secondAttribute="trailing" id="ady-KD-3Bu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="S2Z-yO-uBe" secondAttribute="trailing" id="1fv-Kg-hQN"/>
+                            <constraint firstItem="S2Z-yO-uBe" firstAttribute="height" secondItem="o6x-E1-DER" secondAttribute="height" id="J69-3Y-Kqu"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S2Z-yO-uBe" secondAttribute="bottom" constant="20" id="OCW-p4-a0x"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="o6x-E1-DER" secondAttribute="leading" id="TIj-aO-qzP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o6x-E1-DER" secondAttribute="trailing" id="U0Y-q5-sBk"/>
+                            <constraint firstItem="o6x-E1-DER" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gj7-CN-nJi"/>
+                            <constraint firstItem="o6x-E1-DER" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="lqX-gl-igk"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="S2Z-yO-uBe" secondAttribute="leading" id="m1i-or-mVM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="label" destination="o6x-E1-DER" id="vEo-CO-1gc"/>
-                        <outlet property="textField" destination="McU-Pq-QPb" id="LQQ-Ve-uUY"/>
+                        <outlet property="textView" destination="S2Z-yO-uBe" id="UDl-SW-few"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="446"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Gm1-eF-Tqw">
-            <objects>
-                <viewController id="v6B-1y-ZyK" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="60S-YM-t0q"/>
-                        <viewControllerLayoutGuide type="bottom" id="LqO-15-mcD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WTi-Wv-SSh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSG-6Z-Cdb">
-                                <frame key="frameInset" width="589" height="549"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <segue destination="O4l-36-YSt" kind="embed" id="YsM-zt-Ibb"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sTN-cb-1pl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1166" y="361"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="sDN-Rz-oBM">
-            <objects>
-                <viewController id="O4l-36-YSt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7gL-g2-XrJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="vAk-F7-tWH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ob5-t2-KRa">
-                        <rect key="frame" x="0.0" y="0.0" width="589" height="549"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WEU-BR-l6F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1723" y="247"/>
+            <point key="canvasLocation" x="340" y="449.32533733133437"/>
         </scene>
     </scenes>
 </document>

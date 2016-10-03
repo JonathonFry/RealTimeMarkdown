@@ -13,24 +13,26 @@ import Starscream
 class ViewController: UIViewController {
     
     @IBOutlet var label : UILabel!
-    @IBOutlet var textField : UITextView!
+    @IBOutlet weak var textView: UITextView!
     
     var socket : WebSocket!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        socket = WebSocket(url: URL(string: "ws://localhost:5432/ws")!)
+        socket = WebSocket(url: URL(string: "ws://localhost:3004/realtimemarkdown/ws/")!)
         socket.delegate = self
         socket.connect()
+        
+        textView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
 }
 
@@ -40,9 +42,10 @@ extension ViewController: UITextViewDelegate {
         guard socket != nil else {
             return
         }
-        socket.write(string: textField.text!)
+        socket.write(string: textView.text!)
     }
 }
+
 
 // MARK: - WebSocketDelegate
 extension ViewController: WebSocketDelegate {
@@ -52,7 +55,7 @@ extension ViewController: WebSocketDelegate {
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?){
-        print("websocket is disconnected")
+        print("websocket is disconnected" + (error?.description)!)
     }
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let parts : [String] = text.components(separatedBy: ">>")
@@ -70,8 +73,8 @@ extension ViewController: WebSocketDelegate {
         
         self.label.attributedText = attrStr
         
-        if(raw != self.textField.text){
-            self.textField.text = raw
+        if(raw != self.textView.text){
+            self.textView.text = raw
         }
         
         print("websocket did receieve message \(text)")

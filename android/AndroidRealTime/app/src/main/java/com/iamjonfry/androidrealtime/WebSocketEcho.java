@@ -28,13 +28,16 @@ public final class WebSocketEcho implements WebSocketListener {
 
     public void run(Callback callback) throws IOException {
         this.callback = callback;
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).build();
 
+        initWebSocket();
+    }
+
+    private void initWebSocket() {
+        OkHttpClient client = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
-                .url("ws://10.0.2.2:5432/ws")
+                .url("ws://10.0.2.2:3004/realtimemarkdown/ws")
                 .build();
         WebSocketCall.create(client, request).enqueue(this);
-
         // Trigger shutdown of the dispatcher's executor so this process can exit cleanly.
         client.dispatcher().executorService().shutdown();
     }
@@ -48,6 +51,9 @@ public final class WebSocketEcho implements WebSocketListener {
                         webSocket.sendMessage(RequestBody.create(TEXT, message));
                     } catch (IOException e) {
                         System.err.println("Unable to send messages: " + e.getMessage());
+                    } catch (IllegalStateException e) {
+                        webSocket = null;
+                        initWebSocket();
                     }
                 }
             });
