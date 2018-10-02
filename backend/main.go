@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/olahol/melody"
-	"github.com/russross/blackfriday"
 	"html/template"
 	"net/http"
 	"regexp"
+
+	"github.com/olahol/melody"
+	"github.com/russross/blackfriday"
 )
 
 const split = ">>"
